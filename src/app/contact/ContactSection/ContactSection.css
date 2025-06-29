@@ -1,0 +1,109 @@
+.contact-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+padding: 2rem 13.5%;
+  gap: 40px;
+  background: #fff;
+}
+
+.contact-left {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+}
+
+.contact-left h2 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.contact-left p {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.6;
+}
+
+.social-label {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.social-icons {
+  display: flex;
+  gap: 12px;
+  margin: 12px 0 20px;
+}
+
+.social-icons svg {
+  font-size: 25px;
+  background: #047244;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s;
+  width: 11%;
+  height: 11%;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 250px;
+  border: 0;
+  border-radius: 10px;
+}
+
+.contact-right {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  background: #fff;
+  padding: 30px 25px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: none;
+  background: #f5f5f5;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+}
+
+.contact-form button {
+  background-color: #047244;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #047244;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .contact-section {
+    flex-direction: column;
+    padding: 30px 15px;
+  }
+
+  .contact-left h2 {
+    font-size: 24px;
+  }
+
+  .contact-form button {
+    width: 100%;
+  }
+}

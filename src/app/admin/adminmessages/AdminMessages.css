@@ -1,0 +1,122 @@
+.admin-container {
+  padding: 20px;
+  /* max-width: 1000px; */
+  margin: auto;
+}
+
+.admin-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.admin-table-wrapper {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  border: 1px solid #ccc;
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.admin-table th {
+ color: #555;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.action-btn {
+  padding: 6px 12px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 13px;
+}
+
+.view-btn {
+  background-color: #047244;
+}
+
+.reply-btn {
+  background-color: #047244;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-box {
+  background: white;
+  padding: 25px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 22px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.full-msg {
+  margin-top: 10px;
+  color: #333;
+  font-size: 15px;
+}
+
+.reply-textarea {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  font-size: 14px;
+  resize: vertical;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.send-btn {
+  margin-top: 10px;
+  background-color: #047244;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.buttons-action{
+  display: flex;
+}
+/* Responsive */
+@media (max-width: 600px) {
+  .admin-table th,
+  .admin-table td {
+    font-size: 12px;
+    padding: 8px;
+  }
+}

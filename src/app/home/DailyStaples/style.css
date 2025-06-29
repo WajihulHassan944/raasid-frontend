@@ -1,0 +1,123 @@
+.scroll-container {
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+  overflow: auto hidden;
+  scrollbar-width: none; /* Firefox */
+  user-select: none;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.scroll-container.active {
+  cursor: grabbing;
+}
+
+.scroll-content {
+  display: flex;
+  gap: 1rem;
+}
+
+.product-card {
+  text-align: center;
+  background: #fff;
+  border-radius: 12px;
+  flex-shrink: 0;
+  width: 200px;
+  min-width: 250px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 0 6px #0000000d;
+  scroll-snap-align: start;
+}
+
+/* Keep your existing styles below */
+.daily-wrapper {
+padding: 2rem 13.5%;
+}
+
+.daily-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.daily-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.more-link {
+  color: #047244;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.sale-badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: #047244;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.product-content {
+  text-align: center;
+}
+
+.image-box {
+   position: relative;
+  width: 100%;
+  height: 150px;
+  margin-bottom: 15px;
+}
+
+.product-image {
+    object-fit: contain;
+  width: 100%;
+  height: 100%;
+  
+}
+
+.product-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.product-pricing {
+  margin-bottom: 0.5rem;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #9ca3af;
+  margin-right: 0.5rem;
+}
+
+.final-price {
+  font-weight: 600;
+  color: #111827;
+}
+
+.add-cart {
+color: #fff;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: #047244;
+    border: none;
+    padding: 10px 15px;
+    font-size: 13px;
+    font-weight: bold;
+}
+.cart-btn{
+  display: flex;
+  justify-content: center;
+}

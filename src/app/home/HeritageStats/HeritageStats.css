@@ -1,0 +1,15 @@
+.heritage-images {
+  display: flex;
+  justify-content: center;
+  gap: 12%;
+  padding: 40px 0;
+  padding-top: 20px;
+  flex-wrap: wrap;
+}
+
+.heritage-images img {
+  width: 220px;
+  height: auto;
+  object-fit: contain;
+  object-position: bottom;
+}

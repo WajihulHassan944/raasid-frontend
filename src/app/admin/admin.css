@@ -1,0 +1,83 @@
+
+.main-div{
+    max-width: 100%;
+}
+.chartsdiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 4%;
+  width: 100%;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.statschart {
+  display: flex;
+  padding: 10px 4%;
+  width: 100%;
+  max-width: 1300px;
+  gap: 20px;
+}
+/* adminLayout.css */
+
+.admin-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top Navbar */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+/* Sidebar */
+.side-nav {
+  position: fixed;
+  top: 60px; /* directly under navbar */
+  left: 0;
+  width: 220px;
+  height: calc(100vh - 60px);
+  background-color: #111827;
+  color: white;
+  z-index: 999;
+  padding: 20px 10px;
+  border-right: 1px solid #374151;
+}
+
+/* Main content area */
+.admin-content {
+   /* same as navbar */
+  padding: 20px;
+  min-height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+
+
+@media (max-width: 1024px) {
+  .chartsdiv {
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px 5%;
+    gap: 30px;
+  }
+
+  .statschart {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 600px) {
+  .chartsdiv,
+  .statschart {
+    padding: 10px 3%;
+  }
+}

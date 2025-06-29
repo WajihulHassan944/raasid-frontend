@@ -1,0 +1,130 @@
+
+.discount-banner {
+  background: url('/assets/home/Discount/background.png') no-repeat center center;
+  background-size: contain;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 80px;
+  padding-left: 17%;
+  border-radius: 16px;
+  margin: 40px 10.5%;
+  box-sizing: border-box;
+}
+
+.discount-content {
+  max-width: 500px;
+}
+
+.discount-tag {
+ color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.discount-heading {
+     color: #fff;
+    font-size: 37px;
+    line-height: 1.1;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+.discount-subtext {
+ color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 23px;
+}
+
+.shop-btn {
+  background-color: #fea92c;
+    font-size: 11px;
+    font-weight: 600;
+    fill: #FFFFFF;
+    color: #FFFFFF;
+    border-radius: 5px 5px 5px 5px;
+    padding: 12px 18px 12px 18px;
+    border: none;
+    outline: none;
+  cursor: pointer;
+}
+
+.discount-image img {
+  width: 400px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 1024px) {
+  .discount-banner {
+    padding: 40px 60px;
+    padding-left: 10%;
+    margin: 30px 5%;
+    background-size: cover;
+  }
+
+  .discount-heading {
+    font-size: 30px;
+  }
+
+  .discount-image img {
+    width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .discount-banner {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 30px 30px;
+    padding-left: 30px;
+    gap: 30px;
+    /* background:none; */
+  }
+
+  .discount-content {
+    max-width: 100%;
+  }
+
+  .discount-heading {
+    font-size: 26px;
+  }
+
+  .discount-subtext {
+    font-size: 13px;
+  }
+
+  .discount-image img {
+    display:none;
+  }
+}
+
+@media (max-width: 480px) {
+  .discount-banner {
+    margin: 20px 3%;
+    padding: 20px;
+  }
+
+  .discount-heading {
+    font-size: 22px;
+  }
+
+  .discount-tag {
+    font-size: 12px;
+  }
+
+  .discount-subtext {
+    font-size: 12px;
+  }
+
+  .shop-btn {
+    font-size: 11px;
+    padding: 10px 16px;
+  }
+
+  .discount-image img {
+    display:none;
+  }
+}

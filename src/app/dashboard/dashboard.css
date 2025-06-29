@@ -1,0 +1,264 @@
+
+.dashboard-container {
+  padding: 20px 14%;
+  padding-top: 40px;
+  padding-bottom: 70px;
+  background: #f6f8fa;
+}
+
+/* Common */
+.dashboard-title {
+  margin-bottom: 15px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.dashboard-section {
+  margin-bottom: 30px;
+}
+.categories-wrapper {
+  margin: 20px 0;
+}
+
+.categories-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.categories-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.scroll-btn {
+  background: #047244;
+ color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  border: none;
+  outline: none;
+}
+.flexed-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.categories-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scrollbar-width: none;
+}
+
+.categories-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.category-card {
+  background: white;
+  padding: 12px 16px;
+  border-radius: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  text-align: center;
+  min-width: 175px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-2px);
+}
+
+.category-icon {
+  width: 100%;
+  height: auto;
+  margin: 0 auto 8px;
+}
+
+.category-icon img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Popular Products */
+.dashboard-products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.dashboard-view-more {
+  color: #047244;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.dashboard-products {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-top: 15px;
+  
+  scrollbar-width: none;
+}
+
+.dashboard-product-card {
+  position: relative;
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  min-width: 180px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.05);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.dashboard-product-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.dashboard-product-name {
+  margin-bottom: 4px;
+}
+
+.dashboard-product-desc {
+  font-size: 13px;
+  color: #777;
+}
+
+.dashboard-price-add {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  flex-direction: column;
+    gap: 10px;
+}
+
+.dashboard-product-price {
+  color: #047244;
+  font-weight: bold;
+}
+
+.dashboard-product-price small {
+  color: gray;
+  font-size: 12px;
+  margin-left: 2px;
+}
+
+.dashboard-add-btn {
+  background: #047244;
+  color: white;
+  border: none;
+  width: fit-content;
+  padding-left: 8px;
+  padding-right: 8px;
+  height: 28px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.dashboard-wishlist-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Bottom Split Section */
+.dashboard-bottom-row {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.dashboard-half {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.05);
+}
+
+/* Last Orders */
+.dashboard-order-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.dashboard-order-card:last-child {
+  border-bottom: none;
+}
+
+.dashboard-order-img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-right: 12px;
+}
+
+.dashboard-order-info {
+  flex-grow: 1;
+}
+
+.dashboard-order-price {
+  font-weight: bold;
+  color: #047244;
+}
+
+/* Wishlist */
+.dashboard-wishlist-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.dashboard-wishlist-card:last-child {
+  border-bottom: none;
+}
+
+.dashboard-wishlist-img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-right: 12px;
+}
+
+.dashboard-wishlist-info {
+  flex-grow: 1;
+}
+
+.dashboard-wishlist-remove {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #e74c3c;
+}

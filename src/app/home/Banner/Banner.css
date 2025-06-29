@@ -1,0 +1,225 @@
+
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10%;
+  padding-left: 15%;
+  background-size: cover;
+  height: 77vh;
+  box-sizing: border-box;
+}
+
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 8%;
+  width: 70%; /* Adjust to your preferred width */
+  height: 100%; /* full banner height */
+  background: url("/assets/home/banner/background-overlay.png") center center / contain no-repeat;
+  opacity: 0.9;
+  z-index: 1;
+  pointer-events: none;
+}
+
+
+.banner-one{
+ background: url('/assets/home/banner/banner-green.jpeg') no-repeat center center;
+}
+
+.banner-two{
+ background: url('/assets/home/banner/banner-red.jpeg') no-repeat center center;
+}
+
+.banner-three{
+ background: url('/assets/home/banner/banner-blue.png') no-repeat center center;
+
+}
+
+
+.banner-three::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 8%;
+  width: 48%; /* Adjust to your preferred width */
+  height: 100%; /* full banner height */
+  background: url("/assets/home/banner/background-overlay.png") center center / contain no-repeat;
+  opacity: 0.9;
+  z-index: 1;
+  pointer-events: none;
+}
+
+
+.banner-content {
+  max-width: 50%;
+  z-index: 999999;
+}
+.discount-text {
+  color: #fea92c;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 0 0 15px 0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.banner-heading {
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 55px;
+  font-weight: 700;
+  line-height: 1.1em;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.banner-subtext {
+  color: #ccc;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5em;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.shop-btn {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+  outline: none;
+  background-color: #fec41c;
+    font-size: 11px;
+    fill: #FFFFFF;
+    color: #FFFFFF;
+    border-radius: 5px 5px 5px 5px;
+    padding: 12px 18px 12px 18px;
+    font-weight: 100;
+}
+
+.shop-btn:hover {
+  background-color: #047244;
+}
+
+.banner-image  {
+ max-width: 600px;
+ width: 100%;
+ z-index: 999999;
+}
+
+.banner-image  img{
+ width: 120%;
+ 
+ z-index: 999999;
+}
+/* Large Screens (up to 1200px) */
+@media (max-width: 1200px) {
+  .banner {
+    padding: 0 8%;
+    padding-left: 12%;
+  }
+
+  .banner-heading {
+    font-size: 45px;
+  }
+}
+
+/* Medium Screens (up to 992px) */
+@media (max-width: 992px) {
+  .banner {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 0 5%;
+    height: auto;
+  }
+
+  .banner-content {
+    max-width: 100%;
+    margin-top: 30px;
+  }
+
+  .banner-heading {
+    font-size: 40px;
+  }
+
+  .banner-subtext {
+    font-size: 15px;
+  }
+}
+
+/* Small Screens (up to 768px) */
+@media (max-width: 768px) {
+  .banner {
+    padding: 40px 4%;
+    padding-left: 4%;
+  }
+
+  .banner-heading {
+    font-size: 30px;
+  }
+
+  .banner-subtext {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .discount-text {
+    font-size: 12px;
+    margin-bottom: 10px;
+
+  }
+
+  .shop-btn {
+    font-size: 10px;
+    padding: 10px 16px;
+  }
+
+  .banner-image  img{
+  display: none;
+}
+
+.banner::before, .banner-three::before{
+  display: none;
+}
+}
+.banner-wrapper {
+  position: relative;
+}
+
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
+}
+
+.nav-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.nav-arrow.left {
+  left: 30px;
+}
+
+.nav-arrow.right {
+  right: 30px;
+}
+.font-weight-100{
+  font-weight: 100 !important;
+   background-color: #fea92c !important;
+   color: #3a0304 !important;
+   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}

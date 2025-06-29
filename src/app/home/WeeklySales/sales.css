@@ -1,0 +1,133 @@
+.weekly-wrapper {
+  padding: 2rem 13.5%;
+}
+
+.weekly-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.weekly-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.view-more {
+  color: #047244;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.scroll-container {
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+  overflow: auto hidden;
+  scrollbar-width: none; /* Firefox */
+}
+.scroll-container:active {
+  cursor: grabbing;
+}
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+.scroll-content {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Product card inside horizontal scroll */
+.weekly-card {
+  text-align: center;
+  background: #fff;
+  border-radius: 12px;
+  flex-shrink: 0;
+  width: 200px;
+  min-width: 180px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 0 6px #0000000d;
+  scroll-snap-align: start;
+}
+
+.weekly-img-box {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.image-box-1 {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  margin-bottom: 15px;
+}
+
+.product-card-0{
+  text-align: center;
+  background: #fff;
+  border-radius: 12px;
+  flex-shrink: 0;
+  width: 200px;
+  min-width: 250px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 0 6px #0000000d;
+  scroll-snap-align: start;
+}
+.weekly-name {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.weekly-price {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.weekly-original {
+  text-decoration: line-through;
+  color: #999;
+  font-weight: 400;
+  margin-left: 0.5rem;
+}
+
+.weekly-sold {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.weekly-sold span {
+  color: #047244;
+  font-weight: 500;
+}
+
+.add-cart {
+  color: #fff;
+  cursor: pointer;
+  text-transform: uppercase;
+  background-color: #047244;
+  border: none;
+  padding: 10px 15px;
+  font-size: 13px;
+  font-weight: bold;
+}
+.out-of-stock-label {
+  background-color: #d9534f;
+  color: white;
+  padding: 6px 12px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Responsive padding */
+@media (max-width: 768px) {
+  .weekly-wrapper {
+    padding: 2rem 1rem;
+  }
+}

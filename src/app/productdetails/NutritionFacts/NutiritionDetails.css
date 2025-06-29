@@ -1,0 +1,120 @@
+.product-details-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2rem 13.5%;
+  background: #fffdfb;
+  gap: 2rem;
+}
+
+.product-info-left,
+.product-info-right {
+  flex: 1;
+  max-width: 100%;
+}
+
+.product-section-title {
+  color: #000;
+  font-weight: bold;
+  margin: 1rem 0 0.5rem;
+  font-size: 24px;
+}
+
+.product-ingredient-list {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: ingredient-counter;
+}
+
+.product-ingredient-list li {
+  counter-increment: ingredient-counter;
+  margin-bottom: 0.3rem;
+  margin-top: 0.3rem;
+  position: relative;
+  padding-left: 1.8rem;
+  line-height: 25px;
+}
+
+.product-ingredient-list li::before {
+  content: counter(ingredient-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #000;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.9rem;
+  border: 1px solid #047244;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-packaging,
+.product-serving {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.product-nutrition-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  overflow-x: auto;
+  display: block;
+}
+
+.product-nutrition-table th,
+.product-nutrition-table td {
+  border: 1px solid #047244;
+  padding: 8px;
+  text-align: left;
+}
+
+.product-nutrition-table th {
+  color: #000;
+}
+
+/* Tablet and below */
+@media (max-width: 768px) {
+  .product-details-container {
+    flex-direction: column;
+    padding: 2rem 5%;
+  }
+
+  .product-section-title {
+    font-size: 20px;
+  }
+
+  .product-packaging,
+  .product-serving {
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile-specific */
+@media (max-width: 480px) {
+  .product-section-title {
+    font-size: 18px;
+  }
+
+  .product-ingredient-list li {
+    padding-left: 1.5rem;
+    font-size: 14px;
+  }
+
+  .product-ingredient-list li::before {
+    width: 1.2rem;
+    height: 1.2rem;
+    font-size: 0.75rem;
+  }
+
+  .product-nutrition-table {
+    font-size: 12px;
+  }
+
+  .product-packaging,
+  .product-serving {
+    font-size: 0.9rem;
+  }
+}

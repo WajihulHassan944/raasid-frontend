@@ -1,0 +1,26 @@
+.shop-header {
+ background-image:url(/assets/bg-image.jpeg);
+ padding: 6rem 13.5%;
+}
+
+.container-1 {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.shop-title-2{
+  font-size: 32px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .shop-title {
+    font-size: 24px;
+  }
+
+  .shop-header {
+    padding: 30px 16px;
+  }
+}

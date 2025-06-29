@@ -1,0 +1,73 @@
+/* ---- reset helpers ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.tabs-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 13.5%;           /* mobile side‑gutters */      /* keep content from stretching too wide */
+}
+
+/* ---- tab strip ---- */
+.tabs-nav {
+  list-style: none;
+  display: flex;
+  gap: 2.5rem;                /* space between tab labels */
+  margin: 0;
+  padding: 0 0 0.25rem 0;     /* little room below for active underline */
+  border-bottom: 1px solid #e0e0e0;
+  overflow-x: auto;           /* if many tabs, allow horizontal scroll on mobile */
+}
+
+.tab-item {
+  position: relative;
+  padding: 1rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  white-space: nowrap;        /* keep labels on one line */
+  border-bottom: 2px solid transparent;   /* invisible until active */
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.tab-item:hover {
+  color: #000;
+}
+
+.tab-item.active {
+  color: #000;
+  border-color: #000;         /* the underline */
+  font-weight: 600;
+}
+
+/* ---- tab panel ---- */
+.tab-content {
+  padding: 2rem 0 2.5rem 0;
+  line-height: 1.6;
+}
+
+.tab-content h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+/* ---- mobile tweaks ---- */
+@media (max-width: 600px) {
+  .tabs-nav {
+    gap: 1.25rem;
+  }
+  .tab-item {
+    padding: 0.75rem 0;
+    font-size: 0.9rem;
+  }
+  .tab-content {
+    padding: 1.25rem 0 2rem;
+  }
+  .tab-content h2 {
+    font-size: 1.25rem;
+  }
+}

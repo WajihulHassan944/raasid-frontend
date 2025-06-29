@@ -1,0 +1,106 @@
+/* Layout */
+.product {
+  --gap: 2rem;
+  display: flex;
+  gap: var(--gap);
+padding: 2rem 13.5%;
+margin: auto;
+justify-content: center;
+}
+
+/* ---------- Image block ---------- */
+.product__imgBlock { flex: 0 0 300px; position: relative;  margin: auto;}
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;  /* or whatever ratio your image should have */
+  margin: 0 auto;       /* centers the container */
+}
+.product__imgWrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 130%;       /* keeps aspect ratio */
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0 0 0 / 0.07);
+}
+
+.product__zoomIcon {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  font-size: 1.4rem;
+  background: #fff;
+  border-radius: 50%;
+  padding: 0.35rem;
+  box-shadow: 0 1px 4px rgba(0 0 0 / 0.2);
+  cursor: pointer;
+}
+
+/* ---------- Details block ---------- */
+.product__details { flex: 1 1 auto; max-width: 700px; }
+
+.product__title   { font-size: 28px; margin: 0 0 15px; }
+.product__price   { font-size: 24px; color: #2d2d2d; margin: 0.4rem 0 1.5rem; }
+
+.product__buyRow {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.product__qty {
+  width: 4rem;
+  padding: 0.4rem 0.5rem;
+  font: inherit;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.product__btn {
+  padding: 0.65rem 1.25rem;
+  background: #047244;       /* same deep red as screenshot */
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.product__btn:hover { background: #047244; }
+
+.product__actions {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.product__actions button {
+  background: none;
+  border: none;
+  color: #444;
+  font: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.product__actions button:hover { color: #000; }
+
+.product__meta { margin: 0 0 0.25rem; color: #666; }
+.product__meta span { font-weight: 600; color: #333; }
+
+.product__desc { margin-top: 1.5rem; line-height: 1.6; color: #444; }
+
+/* ---------- Responsiveness ---------- */
+@media (max-width: 768px) {
+  .product {
+    flex-direction: column;
+    align-items: center;
+  }
+  .product__imgBlock { width: 70%; max-width: 320px; }
+  .product__details  { max-width: 100%; }
+}

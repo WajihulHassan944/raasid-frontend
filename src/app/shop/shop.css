@@ -1,0 +1,188 @@
+
+
+.shop-container-one {
+  margin: 0 auto;
+}
+
+.shop-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  flex-direction: column;
+}
+
+.shop-header h2 {
+      background-color: #F8F8F8;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding: 2rem 13.5%;
+    width: 100%;
+}
+
+.shop-filters {
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 25px;
+padding: 2rem 13.5%;
+}
+
+.shop-filters select {
+  padding: 10px 15px;
+  font-size: 14px;
+  /* border: 1px solid #ccc; */
+  border-radius: 4px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+padding: 2rem 13.5%;
+}
+
+.product-card-3 {
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  transition: box-shadow 0.3s ease;
+}
+
+
+.product-card-3 img {
+  max-width: 100%;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.sale-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #047244;
+  color: #fff;
+  padding: 5px 8px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.product-card-3 h3 {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.product-price {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #000;
+}
+
+.product-price .old-price {
+  text-decoration: line-through;
+  color: #888;
+  margin-right: 10px;
+}
+
+.add-to-cart-one {
+  background-color: #047244;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+/* pagination.css */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.page-btn {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.page-btn.active {
+  background-color: #222;
+  color: #fff;
+  border-color: #222;
+}
+
+.page-btn.arrow-btn {
+  font-size: 18px;
+}
+.shop-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+padding: 0rem 13.5%;
+}
+
+.results-count {
+  font-size: 14px;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+}
+
+.sort-dropdown select {
+  font-size: 14px;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+}
+.category-heading{
+     padding: 2rem 13.5%;
+     font-weight: 300;
+}
+.category-heading strong{
+     font-weight: 300;
+}
+.out-of-stock-label {
+  background-color: #d9534f;
+  color: white;
+  padding: 6px 12px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .shop-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+.shop-toolbar {
+    justify-content: space-between;
+    display: flex;
+    gap: 30px;
+  }
+  .shop-filters {
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  .product-card-3 img {
+    height: 120px;
+  }
+}
