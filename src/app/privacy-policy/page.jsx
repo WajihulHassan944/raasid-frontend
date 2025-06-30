@@ -60,7 +60,7 @@ export default function PrivacyPolicy() {
         <p className="terms-text"><strong className='numbers'>13.</strong> <strong> Contact Us</strong><br />
         If you have any questions, concerns, or requests regarding your privacy, please contact us at:<br />
         <strong>E-mail:</strong> Info@raasid.com<br />
-        <strong >Phone Number:</strong> <strong className='numbers'>+92 311 1188837</strong >
+        <strong >Phone Number:</strong> <strong className='numbers'>+92-311-1188837</strong >
         </p> 
 
       </div>

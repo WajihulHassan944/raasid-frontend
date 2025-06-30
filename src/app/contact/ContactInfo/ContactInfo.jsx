@@ -22,7 +22,7 @@ const ContactInfo = () => {
           <h3>Call Us </h3>
         </div>
         <p className="subtitle">Call us on:</p>
-        <p className='numbers'>+92 311 1188837</p>
+        <p className='numbers'>+92-311-1188837</p>
       </div>
 
       <div className="contact-info-card">

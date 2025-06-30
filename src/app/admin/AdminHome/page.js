@@ -11,14 +11,14 @@ const Page = () => {
 <>
 <div className='main-div'>
   <AdminHomeCards />
-  <div className="chartsdiv">
+  {/* <div className="chartsdiv">
   <RevenueUpdates />
   <EarningsCards />
   </div> 
   <div className="statschart">
   <WeeklyStats/>
   <TopPerformers/>
-  </div>
+  </div> */}
   </div>
 </>   
    );

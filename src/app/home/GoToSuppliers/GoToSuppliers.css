@@ -2,69 +2,30 @@
   display: flex;
   justify-content: center;
   gap: 30px;
-padding: 2rem 13.5%;
+  padding: 2rem 13.5%;
   flex-wrap: wrap;
 }
 
 .supplier-card {
-  display: flex;
-  align-items: center;
-  justify-content:space-around;
-  gap:20px;
-  padding:0 30px;
-  padding-right: 40px;
-  border-radius: 16px;
   width: 48%;
-  box-sizing: border-box;
-  color: #222;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-.orange-card {
-  background-image: url(/assets/bg-image.jpeg);
-  background-size: contain;
+.supplier-card:hover {
+  transform: scale(1.02);
 }
 
-.blue-card {
- background-image: url(/assets/home/GoToSuppliers/blue.png);
-   background-size: contain;
-}
-
-.supplier-image {
-  width: 200px;
+.supplier-card img {
+  width: 100%;
   height: auto;
-  object-fit: contain;
+  display: block;
+  object-fit: cover;
 }
 
-.supplier-content {
-  max-width: 100px;
-}
-
-.supplier-content h3 {
-    color: #fff;
-    font-size: 24px;
-    font-weight: 600;
-    text-transform: capitalize;
-    line-height: 1.3em;
-}
-
-.sale-text {
- color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.6;
-  margin: 20px 0 20px;
-}
-
-.supplier-link {
-  background-color: transparent;
-    font-size: 12px;
-    font-weight: 600;
-    fill: #fec41c;
-    color: #fec41c;
-    padding: 0px 0px 0px 0px;
-  cursor: pointer;
-}
-
+/* Responsive Styles */
 @media (max-width: 1024px) {
   .suppliers-container {
     padding: 2rem 5%;
@@ -73,46 +34,12 @@ padding: 2rem 13.5%;
 
   .supplier-card {
     width: 100%;
-    padding: 20px;
-    flex-direction: row;
-    gap: 20px;
-  }
-
-  .supplier-content {
-    max-width: 100%;
-  }
-
-  .supplier-image {
-    width: 150px;
   }
 }
 
 @media (max-width: 768px) {
-  .supplier-card {
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    padding: 20px;
-  }
-
-  .supplier-image {
-    width: 120px;
-  }
-
-  .supplier-content {
-    max-width: 100%;
-  }
-
-  .supplier-content h3 {
-    font-size: 15px;
-  }
-
-  .sale-text {
-    font-size: 13px;
-  }
-
-  .supplier-link {
-    font-size: 12px;
+  .supplier-card img {
+    height: auto;
   }
 }
 
@@ -123,23 +50,9 @@ padding: 2rem 13.5%;
 
   .supplier-card {
     width: 100%;
-    padding: 15px;
   }
 
-  .supplier-image {
-    width: 100px;
-  }
-
-  .supplier-content h3 {
-    font-size: 14px;
-  }
-
-  .sale-text {
-    font-size: 12px;
-  }
-
-  .supplier-link {
-    font-size: 11px;
+  .supplier-card img {
+    width: 100%;
   }
 }
-

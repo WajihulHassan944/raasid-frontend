@@ -53,7 +53,7 @@ const AdminNav = () => {
               </li>
               <li>
                 <Link href="/admin/sales">
-                  <FaExchangeAlt className="icon-three" /> <span>Manage Sales</span>
+                  <FaExchangeAlt className="icon-three" /> <span>Manage Orders</span>
                 </Link>
               </li>
               <li>
@@ -66,11 +66,11 @@ const AdminNav = () => {
                   <FaShippingFast className="icon-three" /> <span>Shipping Fee Calculation</span>
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/admin/notifications">
                   <FaBell className="icon-three" /> <span>Notifications</span>
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         </nav>

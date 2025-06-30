@@ -32,7 +32,7 @@
   border-radius: 12px;
   font-size: 13px;
   display: inline-block;
-  color: white;
+  color: rgb(83, 83, 83);
   font-weight: 500;
 }
 
@@ -51,6 +51,7 @@
 
 .status.cancel {
   background-color: #f66d6d;
+  color: black;
 }
 .action-dropdown {
   padding: 6px 10px;
@@ -64,6 +65,19 @@
 .action-dropdown:focus {
   outline: none;
   border-color: #047244;
+}
+.view-details-btn {
+  padding: 6px 10px;
+  background-color: #047244;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.view-details-btn:hover {
+  background-color: #047244;
 }
 
 /* Mobile Responsive */

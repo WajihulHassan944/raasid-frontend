@@ -181,7 +181,7 @@ useEffect(() => {
         <FiPhone size={22} className="icon-one" />
         <div>
           <small>CALL US NOW</small>
-          <strong className="numbers" style={{ fontWeight: "600" }}>+92 311 1188837</strong>
+          <strong className="numbers" style={{ fontWeight: "600" }}>+92-311-1188837</strong>
         </div>
       </div>
 

@@ -48,7 +48,7 @@ const Footer = () => {
             <h3>CONTACT DETAILS</h3>
             <ul>
               <li><Link href="/contact">Visit Us</Link></li>
-              <li className="numbers"><Link href="/contact">+92 311 1188837</Link></li>
+              <li className="numbers"><Link href="/contact">+92-311-1188837</Link></li>
               <li><Link href="/contact">info@raasid.com</Link></li>
             </ul>
           </div>

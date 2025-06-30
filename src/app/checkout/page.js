@@ -9,6 +9,7 @@ import OrderSummary from "./OrderSummary";
 import "./styles.css";
 import { baseUrl } from '@/app/const';
 import { clearCart } from '@/app/redux/features/cartSlice';
+import { toast } from "react-toastify";
 
 const TCS_TARIFF = {
   'withinCity': { 'upto0_5': 127, 'upto1': 170, 'additional': 170 },
@@ -182,10 +183,10 @@ const calculateWeight = () => {
 
       if (res.ok) {
         dispatch(clearCart());
-        alert("Order Placed successfully");
+        toast.success("Order Placed successfully");
         router.push('/shop');
       } else {
-        alert(data.message || 'Failed to place order.');
+        toast.error(data.message || 'Failed to place order.');
       }
     } catch (err) {
       console.error(err);

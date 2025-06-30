@@ -44,7 +44,7 @@ const TopNav = () => {
 
       <div className="topnav-right">
         <div className="topnavbar-icons">
-          <Link href="/admin/messages">
+          {/* <Link href="/admin/messages">
             <div className="icon-with-badge-topnav">
               <HiOutlineChatBubbleLeftRight className="icon-topnav" />
               <span className="badge-topnav">2</span>
@@ -56,7 +56,7 @@ const TopNav = () => {
               <FiBell className="icon-topnav" />
               <span className="dot-topnav"></span>
             </div>
-          </Link>
+          </Link> */}
 
           {/* User Icon / Dropdown */}
           <div className="user-dropdown-topnav" ref={dropdownRef}>

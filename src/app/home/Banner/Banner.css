@@ -26,14 +26,17 @@
 
 .banner-one{
  background: url('/assets/home/banner/banner-green.jpeg') no-repeat center center;
+ background-size: cover;
 }
 
 .banner-two{
  background: url('/assets/home/banner/banner-red.jpeg') no-repeat center center;
+ background-size: cover;
 }
 
 .banner-three{
  background: url('/assets/home/banner/banner-blue.png') no-repeat center center;
+ background-size: cover;
 
 }
 

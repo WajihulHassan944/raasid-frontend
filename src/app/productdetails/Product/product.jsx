@@ -34,26 +34,32 @@ export default function ProductPage({ product }) {
       </section>
 
       <section className="product__details">
-        <h3 className="product__title">{product.name}</h3>
-        <p className="product__price numbers">{product.price.toFixed(2)} PKR</p>
+  <h3 className="product__title">{product.name}</h3>
 
-        <div className="product__buyRow">
-          <input
-            type="number"
-            min="1"
-            value={qty}
-            onChange={e => setQty(+e.target.value)}
-            className="product__qty"
-          />
-          <button className="product__btn" onClick={handleAddToCart}>
-            Add to Cart
-          </button>
-        </div>
+  {product.price === 0 ? (
+    <div className="out-of-stock-label">Out of Stock</div>
+  ) : (
+    <p className="product__price numbers">{product.price.toFixed(2)} PKR</p>
+  )}
 
-        <p className="product__meta">
-          <span>Category:</span> {product.category}
-        </p>
-      </section>
+  <div className="product__buyRow">
+    <input
+      type="number"
+      min="1"
+      value={qty}
+      onChange={e => setQty(+e.target.value)}
+      className="product__qty"
+    />
+    <button className="product__btn" onClick={handleAddToCart}>
+      Add to Cart
+    </button>
+  </div>
+
+  <p className="product__meta">
+    <span>Category:</span> {product.category}
+  </p>
+</section>
+
     </main>
   );
 }

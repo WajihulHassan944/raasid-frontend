@@ -67,7 +67,7 @@ const faqs = [
       },
       {
         question: 'How do I request a refund or replacement?',
-        answer: 'Email us at info@raasid.com or call +92 311 1188837 with your order number and issue. We’ll review and respond promptly.',
+        answer: 'Email us at info@raasid.com or call +92-311-1188837 with your order number and issue. We’ll review and respond promptly.',
       },
     ],
   },

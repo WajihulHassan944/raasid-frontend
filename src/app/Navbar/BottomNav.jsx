@@ -86,7 +86,8 @@ const user = useSelector((state) => state.user.userData);
       <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
         <li><Link href="/home">HOME</Link></li>
         <li><Link href="/about">ABOUT US</Link></li>
-        <li><Link href="/shop">SHOP</Link></li>
+        <li><Link href="/shop">PRODUCTS</Link></li>
+        <li><Link href="/blog">BLOGS</Link></li>
         <li><Link href="/tour">360 TOUR</Link></li>
         <li><Link href="/contact">CONTACT</Link></li>
 <div className='desktopDisplayNone'>
@@ -94,7 +95,7 @@ const user = useSelector((state) => state.user.userData);
         <FiPhone size={22} className="icon-one" />
         <div>
           <small>CALL US NOW</small>
-          <strong className="numbers" style={{ fontWeight: "600" }}>+92 370 2333125</strong>
+          <strong className="numbers" style={{ fontWeight: "600" }}>+92-311-1188837</strong>
         </div>
       </div>
 

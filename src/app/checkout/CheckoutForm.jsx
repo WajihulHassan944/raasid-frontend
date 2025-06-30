@@ -54,19 +54,22 @@ export default function CheckoutForm({ formData, onChange, handleSubmit, loading
           onChange={(e) => onChange('address', e.target.value)}
         />
 
-        {/* City dropdown */}
-        <select
-          required
-          value={formData.city}
-          onChange={(e) => onChange('city', e.target.value)}
-        >
-          <option value="">Select a city</option>
-          {cities.map((city, idx) => (
-            <option key={idx} value={city}>
-              {city}
-            </option>
-          ))}
-        </select>
+     {/* City dropdown */}
+<select
+  required
+  value={formData.city}
+  onChange={(e) => onChange('city', e.target.value)}
+>
+  <option value="">Select a city</option>
+  {[...cities]
+    .sort((a, b) => a.localeCompare(b)) // Sort alphabetically
+    .map((city, idx) => (
+      <option key={idx} value={city}>
+        {city}
+      </option>
+    ))}
+</select>
+
 
         <input
           className="numbers"
