@@ -18,7 +18,7 @@ const TCS_TARIFF = {
 };
 const BASE_WEIGHT_MAP = {
   'ready to eat meals': 275,
-  'granola bars': 80,
+  'granola bars': 60,
   'mres': 1280,
 };
 export default function CheckoutPage() {
@@ -59,7 +59,7 @@ export default function CheckoutPage() {
   };
 const BASE_WEIGHT_MAP = {
   'ready to eat meals': 275,
-  'granola bars': 80,
+  'granola bars': 60,
   'mres': 1280,
 };
 
