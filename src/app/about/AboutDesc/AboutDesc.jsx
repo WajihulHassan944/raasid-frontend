@@ -20,7 +20,7 @@ const AboutDesc = () => {
       <div className="about-points">
         <ul>
           <li><FaDotCircle className="dot-icon" /> Certified under ISO, Halal, and Food Safety standards.</li>
-          <li><FaDotCircle className="dot-icon" /> Wide distribution across 70+ cities in Pakistan.</li>
+          <li><FaDotCircle className="dot-icon" /> Wide distribution across all over the Pakistan.</li>
           <li><FaDotCircle className="dot-icon" /> Blending natural ingredients with modern processing.</li>
           <li><FaDotCircle className="dot-icon" /> Focused on nutrition, convenience, and customer satisfaction.</li>
         </ul>

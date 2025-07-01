@@ -38,9 +38,9 @@ const TopNav = () => {
         <FiMoreVertical className="topNavIcon" />
       </div>
 
-      <div className="topnav-left">
+      {/* <div className="topnav-left">
         <FaSearch className="icon-three" />
-      </div>
+      </div> */}
 
       <div className="topnav-right">
         <div className="topnavbar-icons">

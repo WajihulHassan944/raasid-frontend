@@ -12,8 +12,10 @@ const ContactInfo = () => {
           <h3>Address</h3>
         </div>
         <p className="subtitle">Visit us at:</p>
-        <p>Rawat Technology Park</p>
-        <p>Islamabad, Pakistan</p>
+        <p>MRE Project
+c/o Headquarters, ASC Centre
+</p>
+        <p>Nowshera, Khyber Pakhtunkhwa, Pakistan</p>
       </div>
 
       <div className="contact-info-card">
@@ -40,8 +42,7 @@ const ContactInfo = () => {
           <h3>Office Hours</h3>
         </div>
         <p className="subtitle">Opening Time:</p>
-        <p>Mon – Fri : 9:00 AM – 6:00 PM</p>
-        <p>Sunday: Closed</p>
+        <p>Mon – Fri : 9:00 AM – 5:00 PM</p>
       </div>
     </section>
   );

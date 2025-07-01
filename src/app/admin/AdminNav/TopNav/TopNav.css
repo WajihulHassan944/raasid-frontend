@@ -7,11 +7,11 @@
   background: #fff;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 30px;
   padding-top: 10px;
   z-index: 1000;
-   box-shadow: 6px 0px 18px rgba(0, 0, 0, 0.12);
+  box-shadow: 6px 0px 18px rgba(0, 0, 0, 0.12);
+  justify-content: flex-end
 
 }
 
@@ -113,7 +113,6 @@
 }
 .user-dropdown-topnav {
   position: relative;
-  margin-left: 1rem;
 }
 
 .user-initial-topnav {

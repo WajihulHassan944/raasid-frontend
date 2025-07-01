@@ -11,16 +11,7 @@ import { baseUrl } from '@/app/const';
 import { clearCart } from '@/app/redux/features/cartSlice';
 import { toast } from "react-toastify";
 
-const TCS_TARIFF = {
-  'withinCity': { 'upto0_5': 127, 'upto1': 170, 'additional': 170 },
-  'sameZone': { 'upto0_5': 170, 'upto1': 212, 'additional': 170 },
-  'differentZone': { 'upto0_5': 212, 'upto1': 255, 'additional': 170 },
-};
-const BASE_WEIGHT_MAP = {
-  'ready to eat meals': 275,
-  'granola bars': 60,
-  'mres': 1280,
-};
+
 export default function CheckoutPage() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -57,71 +48,31 @@ export default function CheckoutPage() {
       [field]: value,
     }));
   };
-const BASE_WEIGHT_MAP = {
-  'ready to eat meals': 275,
-  'granola bars': 60,
-  'mres': 1280,
-};
-
-const calculateWeight = () => {
+  
+  const calculateWeight = () => {
   return cartItems.reduce((total, item) => {
-    const category = item.category?.toLowerCase() || '';
-    const description = item.description?.toLowerCase() || '';
+    const packaging = item.packaging || '';
+    const match = packaging.match(/Net Weight:\s*(\d+)g/i);
 
-    let matchedWeight = 0;
-    let matchedLabel = 'Unknown';
+    let itemWeight = 0;
 
-    if (category.includes('ready') && category.includes('meal')) {
-      matchedWeight = BASE_WEIGHT_MAP['ready to eat meals'];
-      matchedLabel = 'Ready to Eat Meals';
-    } else if (category.includes('granola')) {
-      matchedWeight = BASE_WEIGHT_MAP['granola bars'];
-      matchedLabel = 'Granola Bars';
-    } else if (category.includes('mre')) {
-      // Check for specific MRE description
-      if (
-        description.includes('chicken based with rich energy bars') ||
-        description.includes('beef based with rich energy bars')
-      ) {
-        matchedWeight = 1230;
-        matchedLabel = 'MREs (lighter variant)';
-      } else {
-        matchedWeight = BASE_WEIGHT_MAP['mres'];
-        matchedLabel = 'MREs (standard)';
-      }
+    if (match && match[1]) {
+      itemWeight = parseInt(match[1], 10);
+    } else {
+      console.warn(`Could not extract weight for item: ${item.category}, packaging: "${packaging}"`);
     }
 
-    const totalItemWeight = matchedWeight * item.quantity;
+    const totalItemWeight = itemWeight * item.quantity;
 
     console.log(
-      `Items: ${item.category} | Description: ${item.description} | Matched: ${matchedLabel} | Quantity: ${item.quantity} | Per Unit Weight: ${matchedWeight}g | Total Weight: ${totalItemWeight}g`
+      `Category: ${item.category} | Packaging: ${item.packaging} | Per Unit Weight: ${itemWeight}g | Quantity: ${item.quantity} | Total Weight: ${totalItemWeight}g`
     );
 
     return total + totalItemWeight;
   }, 0);
 };
-  const resolveTCSZone = async (originCity, deliveryCity) => {
-  try {
-    const res = await fetch(`${baseUrl}/cities/resolve-zone/${originCity}/${deliveryCity}`);
-    const data = await res.json();
-    return data.zone || 'differentZone';
-  } catch (err) {
-    console.error('TCS zone resolution error:', err);
-    return 'differentZone';
-  }
-};
 
-  const calculateTCSFee = async (weightGrams, deliveryCity) => {
-  const zone = await resolveTCSZone('Nowshera', deliveryCity); // origin hardcoded here
-  const weightKg = weightGrams / 1000;
-
-  if (weightKg <= 0.5) return TCS_TARIFF[zone].upto0_5;
-  if (weightKg <= 1) return TCS_TARIFF[zone].upto1;
-
-  const additionalUnits = Math.ceil(weightKg - 1);
-  return TCS_TARIFF[zone].upto1 + additionalUnits * TCS_TARIFF[zone].additional;
-};
-
+  
   const calculatePakistanPostFee = async (weightGrams) => {
     try {
       const res = await fetch(`${baseUrl}/courier/tariff?weight=${weightGrams}`);
@@ -132,18 +83,30 @@ const calculateWeight = () => {
       return 0;
     }
   };
-
-  useEffect(() => {
+useEffect(() => {
   const updateShippingFee = async () => {
     const totalWeight = calculateWeight();
     setWeight(totalWeight);
 
-    if (formData.shippingMethod === 'TCS') {
-      const fee = await calculateTCSFee(totalWeight, formData.city);
-      setShippingFee(fee);
-    } else if (formData.shippingMethod === 'Pakistan Post') {
-      const fee = await calculatePakistanPostFee(totalWeight);
-      setShippingFee(fee);
+    const weightStr = `${totalWeight}g`;
+
+    try {
+      if (formData.shippingMethod === 'TCS') {
+        const res = await fetch(`${baseUrl}/cities/resolve-shipping-fee/${formData.city}/${weightStr}`);
+        const data = await res.json();
+        if (res.ok) {
+          setShippingFee(data.shippingFee || 0);
+        } else {
+          toast.error("Failed to fetch TCS shipping fee");
+          setShippingFee(0);
+        }
+      } else if (formData.shippingMethod === 'Pakistan Post') {
+        const fee = await calculatePakistanPostFee(totalWeight);
+        setShippingFee(fee);
+      }
+    } catch (error) {
+      console.error("Shipping fee calculation error:", error);
+      toast.error("Error calculating shipping fee");
     }
   };
 
@@ -152,7 +115,8 @@ const calculateWeight = () => {
   }
 }, [formData.shippingMethod, formData.city, cartItems]);
 
-  const getTotal = () =>
+
+const getTotal = () =>
     cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0) + shippingFee;
 
   const handleSubmit = async (e) => {

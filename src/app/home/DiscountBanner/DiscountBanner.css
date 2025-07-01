@@ -1,19 +1,18 @@
 
 .discount-banner {
   background: url('/assets/home/Discount/background.png') no-repeat center center;
-  background-size: contain;
+  background-size: cover;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 50px 80px;
-  padding-left: 17%;
-  border-radius: 16px;
-  margin: 40px 10.5%;
+  padding: 80px 80px;
+  padding-left: 24%;
+  /* margin: 40px 10.5%; */
   box-sizing: border-box;
 }
 
 .discount-content {
-  max-width: 500px;
+  max-width: 80%;
 }
 
 .discount-tag {

@@ -93,6 +93,22 @@
   cursor: pointer;
   padding-left: 2px;
 }
+.justify-space-between{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.justify-space-between button{
+  background-color: #035b37;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
 .read-more-dots:hover {
   text-decoration: underline;
 }

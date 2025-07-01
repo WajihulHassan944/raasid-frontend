@@ -88,7 +88,7 @@ export default function DailyStaples() {
     <section className="daily-wrapper">
       <div className="daily-header">
         <Link href="/shop?category=MREs" className="daily-title clickable-title">
-          MRE&apos;s
+          MREs
         </Link>
         <Link href="/shop?category=MREs" className="more-link">
           MORE PRODUCTS →
@@ -111,7 +111,7 @@ export default function DailyStaples() {
                       />
                     )}
                   </div>
-                  <p className="product-name">{product.name}</p>
+                  <p className="product-name numbers">{product.name}</p>
                   <p
                     className="weekly-name numbers"
                     style={{ fontWeight: "600", fontSize: "14px" }}

@@ -12,10 +12,10 @@ export default function HomePage() {
   return (
     <>
     <Banner/>
+    <TopCategories/>
     <InfoCards/>
     <WeeklySales/>
     <GoToSuppliers/>
-    <TopCategories/>
     <DiscountBanner/>
     <HeritageStats/>
     <DailyStaples/>

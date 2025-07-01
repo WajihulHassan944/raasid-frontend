@@ -16,12 +16,12 @@ export default function AdminPage() {
 
   useEffect(() => {
     // 🚫 Redirect if not logged in or not admin
-    if (!user || !user.role?.includes('admin')) {
+    if (!user || !(user.role?.includes('admin') || user.role?.includes('subadmin'))) {
       router.replace('/home');
     }
   }, [user, router]);
 
-  if (!user || !user.role?.includes('admin')) {
+  if (!user || !(user.role?.includes('admin') || user.role?.includes('subadmin'))) {
     return null; // ⏳ Optional: show a loader or blank while redirecting
   }
 

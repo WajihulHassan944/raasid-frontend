@@ -10,6 +10,7 @@ import {toast } from 'react-toastify';
 
 const AddProducts = () => {
   const [products, setProducts] = useState([]);
+   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
   const [price, setPrice] = useState('');
@@ -129,7 +130,7 @@ const handleClose = () => {
 
   const handleEdit = (prod) => {
     formRef.current?.scrollIntoView({ behavior: 'smooth' }); // 🔁 Scroll to form
-
+setShowForm(true)
     setName(prod.name);
     setCategory(prod.category);
     setPrice(prod.price);
@@ -178,8 +179,14 @@ const handleClose = () => {
 
   return (
     <div className="mp-container">
-      <h2 className="mp-title">Products</h2>
+      <div className='justify-space-between'>
+        <h2 className="mp-title">Products</h2>
+        <button onClick={() => setShowForm(!showForm)}>
+        {showForm ? 'Close Form' : 'Add Product'}
+      </button>
+      </div>
       <div className="mp-wrapper">
+       {showForm && (
         <div className="mp-form" ref={formRef}> {/* 🧷 Attach the ref */}
           <label>Product Name:</label>
           <input value={name} onChange={(e) => setName(e.target.value)} type="text" />
@@ -209,7 +216,7 @@ const handleClose = () => {
             {isSubmitting ? 'Saving...' : editingId ? 'Update Product' : 'Add Product'}
           </button>
         </div>
-
+       )}
         <div className="mp-table-wrapper">
           <table className="mp-table">
             <thead>
@@ -244,8 +251,8 @@ const handleClose = () => {
                   <td className="numbers">
   {prod.description.length > 40 ? (
     <>
-      {prod.description.slice(0, 40)}
-  <span className="read-more-dots" onClick={() => handleReadMore(prod.description)}>...</span>
+      
+  <span className="read-more-dots" onClick={() => handleReadMore(prod.description)}>{prod.description.slice(0, 40)}...</span>
     </>
   ) : (
     prod.description
@@ -263,12 +270,12 @@ const handleClose = () => {
     if (nutritionsText.length > 40) {
       return (
         <>
-          {nutritionsText.slice(0, 40)}
+          
           <span
             className="read-more-dots"
             onClick={() => handleReadMore(nutritionsText)}
           >
-            ...
+          {nutritionsText.slice(0, 40)}  ...
           </span>
         </>
       );
@@ -289,12 +296,12 @@ const handleClose = () => {
     if (ingredientsText?.length > 40) {
       return (
         <>
-          {ingredientsText.slice(0, 40)}
+          
           <span
             className="read-more-dots"
             onClick={() => handleReadMore(ingredientsText)}
           >
-            ...
+           {ingredientsText.slice(0, 40)} ...
           </span>
         </>
       );

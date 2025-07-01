@@ -74,12 +74,17 @@ const ContactSection = () => {
         </div>
 
         <div className="map-container">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10601.41597216204!2d73.195094!3d33.4913652!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dff16f1be5b4d7%3A0xd2724b0b85ca3ae4!2sRawat%20Technology%20Park!5e0!3m2!1sen!2s!4v1718371456762!5m2!1sen!2s"
-            loading="lazy"
-            allowFullScreen=""
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+         <div className="map-container">
+<iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6642.733224474369!2d71.9888661!3d33.9961758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ded30309a9590b%3A0x1e9981a72f6446f9!2sASC%20Centre!5e0!3m2!1sen!2s!4v1719833894344!5m2!1sen!2s"
+  title="MRE Project Location"
+  loading="lazy"
+  allowFullScreen
+  referrerPolicy="no-referrer-when-downgrade"
+></iframe>
+
+</div>
+
         </div>
       </div>
 

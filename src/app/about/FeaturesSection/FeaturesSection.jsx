@@ -19,7 +19,7 @@ const features = [
   {
     title: 'Our Journey',
     description:
-      'Rooted in a deep appreciation for authentic Pakistani flavors, Raasid now distributes products in 70+ cities and continues to expand its reach and product line.',
+      'Rooted in a deep appreciation for authentic Pakistani flavors, Raasid now distributes products in all over the Pakistan and continues to expand its reach and product line.',
     icon: <FaHistory style={{ height: '30px', width: '30px' }} />,
   },
 ];

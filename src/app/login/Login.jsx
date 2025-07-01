@@ -32,16 +32,19 @@ export default function LoginCard() {
       const data = await res.json();
 
       if (res.ok) {
-        const userRole = data.user.role?.[0] || 'user';
+        const userRole = Array.isArray(data.user.role)
+          ? data.user.role[0]
+          : data.user.role || 'user';
+
         dispatch(login(data.user));
 
-        if (userRole === 'admin') {
+        if (userRole === 'admin' || userRole === 'subadmin') {
           router.push('/admin');
         } else {
           if (cartItems.length === 0) {
-            router.push('/home'); // 👈 User + empty cart
+            router.push('/home');
           } else {
-            router.push('/checkout'); // 👈 User + cart items
+            router.push('/checkout');
           }
         }
       } else {

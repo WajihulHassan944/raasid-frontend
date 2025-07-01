@@ -5,7 +5,7 @@
   padding: 2rem;
   max-width: 1200px;
   margin: auto;
-  font-family: 'poppins';
+  font-family: 'Poppins';
 }
 
 .order-main {
@@ -20,9 +20,13 @@
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
-
+.order-summary h3{
+  font-weight: 500;
+  margin-bottom: 20px;
+}
 .order-title {
-  font-size: 22px;
+  font-size: 18px;
+  font-weight: 500;
   margin-bottom: 5px;
 }
 
@@ -38,8 +42,19 @@
   padding: 1rem;
   margin-bottom: 20px;
   border-radius: 8px;
+  
+}
+.delivery-box h3, .details-box h3{
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
+.delivery-box p, .details-box p{
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
 .details-box {
   background: #fff;
   border: 1px solid #ddd;
@@ -70,7 +85,7 @@
 }
 
 .product-name {
-  font-weight: bold;
+  font-weight: 500;
   margin: 0;
 }
 
@@ -101,6 +116,7 @@
   border-top: 1px solid #eee;
   padding-top: 10px;
   margin-top: 10px;
+  font-size: 20px;
 }
 .go-orders-btn {
   margin: 2rem auto;
