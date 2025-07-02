@@ -1,6 +1,11 @@
 'use client';
 import Image from "next/image";
-import ReactImageMagnify from 'react-image-magnify';
+
+import InnerImageZoom from 'react-inner-image-zoom';
+import 'react-inner-image-zoom/lib/styles.min.css';
+
+
+
 import { IoClose } from 'react-icons/io5';
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
@@ -158,34 +163,21 @@ const [popupImage, setPopupImage] = useState(null);
       </button>
 
       <div className="magnify-wrapper">
-        <ReactImageMagnify
-          {...{
-            smallImage: {
-              alt: 'Zoomed Product',
-              isFluidWidth: false,
-              width: 500,
-              height: 500,
-              src: popupImage,
-            },
-            largeImage: {
-              src: popupImage,
-              width: 1600,
-              height: 1600,
-            },
-            enlargedImagePosition: 'over',
-            enlargedImageContainerDimensions: {
-              width: '500px',
-              height: '500px',
-            },
-            lensStyle: {
-              backgroundColor: 'rgba(255, 255, 255, 0.3)',
-              border: '1px solid #ccc',
-              width: '100px',
-              height: '100px',
-            },
-            isHintEnabled: true,
-            shouldUsePositiveSpaceLens: true, // Makes the zoom stay under lens
+        <InnerImageZoom
+          src={popupImage}
+          zoomSrc={popupImage}
+          zoomType="hover"
+          zoomPreload={true}
+          zoomScale={1.8}
+          width={500}
+          height={500}
+          zoomLensStyle={{
+            width: '100px',
+            height: '100px',
+            backgroundColor: 'rgba(255,255,255,0.4)',
+            border: '1px solid #ccc',
           }}
+          hasSpacer={true}
         />
       </div>
     </div>
