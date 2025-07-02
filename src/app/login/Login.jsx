@@ -14,50 +14,51 @@ export default function LoginCard() {
   const [password, setPassword] = useState('');
   const [showPwd, setShowPwd] = useState(false);
   const [error, setError] = useState('');
+const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const router = useRouter();
   const cartItems = useSelector((state) => state.cart.items); // 👈 Access cart from Redux
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  setLoading(true);
+  setError('');
 
-    try {
-      const res = await fetch(`${baseUrl}/users/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
+  try {
+    const res = await fetch(`${baseUrl}/users/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (res.ok) {
-        const userRole = Array.isArray(data.user.role)
-          ? data.user.role[0]
-          : data.user.role || 'user';
+    if (res.ok) {
+      const userRole = Array.isArray(data.user.role)
+        ? data.user.role[0]
+        : data.user.role || 'user';
 
-        dispatch(login(data.user));
+      dispatch(login(data.user));
 
-        if (userRole === 'admin' || userRole === 'subadmin') {
-          router.push('/admin');
-        } else {
-          if (cartItems.length === 0) {
-            router.push('/home');
-          } else {
-            router.push('/checkout');
-          }
-        }
+      if (userRole === 'admin' || userRole === 'subadmin') {
+        router.push('/admin');
       } else {
-        if (data.message?.includes('not registered')) {
-          router.push('/signup');
-        } else {
-          setError(data.message || 'Login failed');
-        }
+        router.push(cartItems.length === 0 ? '/home' : '/checkout');
       }
-    } catch (err) {
-      setError('Something went wrong. Please try again.');
+    } else {
+      if (data.message?.includes('not registered')) {
+        router.push('/signup');
+      } else {
+        setError(data.message || 'Login failed');
+      }
     }
-  };
+  } catch (err) {
+    setError('Something went wrong. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <main className="login-wrapper">
@@ -108,9 +109,16 @@ export default function LoginCard() {
 
           {error && <p className="login-error">{error}</p>}
 
-          <button type="submit" className="login-btn">
-            Log in
-          </button>
+         <button type="submit" className="login-btn" disabled={loading}>
+  {loading ? (
+    <>
+      Logging in <span className="loader"></span>
+    </>
+  ) : (
+    'Log in'
+  )}
+</button>
+
 
           <Link href="/signup" className="forgot-link">
             Don’t have an account? Sign Up

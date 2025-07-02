@@ -1,5 +1,7 @@
 'use client';
 import Image from "next/image";
+import ReactImageMagnify from 'react-image-magnify';
+import { IoClose } from 'react-icons/io5';
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -15,6 +17,7 @@ export default function WeekySales() {
   const dispatch = useDispatch();
   const router = useRouter();
   const [products, setProducts] = useState([]);
+const [popupImage, setPopupImage] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -99,18 +102,23 @@ export default function WeekySales() {
         <div className="scroll-content">
           {products.map((product, idx) => (
             <div key={product._id || idx} className="product-card-0">
-              <Link href={`/productdetails?productId=${product._id}`}>
                 <div className="product-content">
-                  <div className="image-box-1">
-                    {product.image?.startsWith("https://res.cloudinary.com/") && (
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        className="weekly-img-box"
-                      />
-                    )}
-                  </div>
+                 <div
+  className="image-box-1"
+  onClick={() => setPopupImage(product.image)}
+>
+  {product.image?.startsWith("https://res.cloudinary.com/") && (
+    <Image
+      src={product.image}
+      alt={product.name}
+      fill
+      className="weekly-img-box zoom-on-hover"
+    />
+  )}
+</div>
+ <Link href={`/productdetails?productId=${product._id}`}>
+             
+
                   <p className="weekly-name">{product.name}</p>
                   <p
                     className="weekly-name numbers"
@@ -126,8 +134,9 @@ export default function WeekySales() {
                       <span className="weekly-price numbers">{product.price} PKR</span>
                     </div>
                   )}
+                  </Link>
                 </div>
-              </Link>
+              
 
               {product.price !== 0 && (
                 <div className="cart-btn">
@@ -140,6 +149,49 @@ export default function WeekySales() {
           ))}
         </div>
       </div>
+{popupImage && (
+  <div className="popup-overlay" onClick={() => setPopupImage(null)}>
+    <div className="popup-inner" onClick={(e) => e.stopPropagation()}>
+      {/* Close Button */}
+      <button className="close-btn" onClick={() => setPopupImage(null)}>
+        <IoClose size={24} />
+      </button>
+
+      <div className="magnify-wrapper">
+        <ReactImageMagnify
+          {...{
+            smallImage: {
+              alt: 'Zoomed Product',
+              isFluidWidth: false,
+              width: 500,
+              height: 500,
+              src: popupImage,
+            },
+            largeImage: {
+              src: popupImage,
+              width: 1600,
+              height: 1600,
+            },
+            enlargedImagePosition: 'over',
+            enlargedImageContainerDimensions: {
+              width: '500px',
+              height: '500px',
+            },
+            lensStyle: {
+              backgroundColor: 'rgba(255, 255, 255, 0.3)',
+              border: '1px solid #ccc',
+              width: '100px',
+              height: '100px',
+            },
+            isHintEnabled: true,
+            shouldUsePositiveSpaceLens: true, // Makes the zoom stay under lens
+          }}
+        />
+      </div>
+    </div>
+  </div>
+)}
+
     </section>
   );
 }

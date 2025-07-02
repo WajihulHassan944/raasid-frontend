@@ -5,11 +5,6 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  background: #f5f5f5;
-}
-
 .login-wrapper {
   display: flex;
   justify-content: center;
@@ -133,5 +128,33 @@ body {
   }
   .login-title {
     font-size: 1.5rem;
+  }
+}
+.login-btn {
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.login-btn:disabled {
+  background-color: #2e2e2e;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.loader {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #c8f750;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }

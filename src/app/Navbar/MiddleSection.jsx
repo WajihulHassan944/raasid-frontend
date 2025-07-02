@@ -194,6 +194,16 @@ useEffect(() => {
             {dropdownOpen && (
               <div className="dropdown-menu">
                 <p className="dropdown-item">Hi, {user.firstName}</p>
+                <Link
+          href={
+            user.role?.includes('admin') || user.role?.includes('subadmin')
+              ? '/admin'
+              : '/dashboard'
+          }
+          className="dropdown-item link"
+        >
+          Dashboard
+        </Link>
                 <button className="dropdown-item logout-btn" onClick={handleLogout}>
                   Logout
                 </button>

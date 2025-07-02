@@ -11,6 +11,9 @@ const OrderSummary = () => {
   const orderId = searchParams.get('id');
   const [order, setOrder] = useState(null);
   const [courier, setCourier] = useState(null);
+  const [tracking, setTracking] = useState(null);
+  const [showTracking, setShowTracking] = useState(false);
+  const [loadingTracking, setLoadingTracking] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -22,7 +25,7 @@ const OrderSummary = () => {
         const data = await res.json();
         if (data.success) {
           setOrder(data.order);
-          setCourier(data.courier); // 👈 capture courier info
+          setCourier(data.courier);
         } else {
           console.error('Order not found');
         }
@@ -34,7 +37,23 @@ const OrderSummary = () => {
     fetchOrder();
   }, [orderId]);
 
-  if (!order) return <div>Loading order...</div>;
+  const handleTrackToggle = async () => {
+    if (!showTracking && order.shippingMethod?.toLowerCase() === 'tcs' && courier?.ppOrderId) {
+      setLoadingTracking(true);
+      try {
+        const trackRes = await fetch(`${baseUrl}/courier/tcs/track/${courier.ppOrderId}`);
+        const trackData = await trackRes.json();
+        setTracking(trackData);
+      } catch (error) {
+        console.error('Error fetching tracking info:', error);
+      } finally {
+        setLoadingTracking(false);
+      }
+    }
+    setShowTracking(prev => !prev);
+  };
+
+  if (!order) return <div className="loading-msg">Loading order...</div>;
 
   return (
     <>
@@ -66,15 +85,34 @@ const OrderSummary = () => {
                 <p><strong>Payment:</strong> {order.paymentMethod}</p>
 
                 {order.shippingMethod?.toLowerCase() === 'tcs' && (
-                  <p><strong>Consignment No:</strong> {order.ppTransactionId || 'N/A'}</p>
+                  <p><strong>Consignment No:</strong> {courier?.ppOrderId || 'N/A'}</p>
                 )}
 
                 {order.shippingMethod?.toLowerCase() === 'pak post' && (
-                  <p><strong>Pak Post Order ID:</strong> {order.ppOrderId || 'N/A'}</p>
+                  <p><strong>Pak Post Order ID:</strong> {courier?.ppOrderId || 'N/A'}</p>
                 )}
               </div>
             </div>
           </div>
+
+          {showTracking && (
+            <div className="tracking-box">
+              <h3>TCS Tracking Info</h3>
+              {loadingTracking ? (
+                <p>Loading tracking details...</p>
+              ) : tracking ? (
+                <>
+                  <p><strong>Consignment No:</strong> {tracking.consignmentNo}</p>
+                  <p><strong>Status:</strong> {tracking.status}</p>
+                  <p><strong>Shipment Info:</strong> {tracking.shipmentInfo !== null ? JSON.stringify(tracking.shipmentInfo) : 'No shipment info available.'}</p>
+                  <p><strong>Delivery Info:</strong> {tracking.deliveryInfo !== null ? JSON.stringify(tracking.deliveryInfo) : 'No delivery info available.'}</p>
+                  <p><strong>Checkpoints:</strong> {tracking.checkpoints !== null ? JSON.stringify(tracking.checkpoints) : 'No checkpoints available.'}</p>
+                </>
+              ) : (
+                <p>Unable to fetch tracking data.</p>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="order-summary">
@@ -112,9 +150,15 @@ const OrderSummary = () => {
         </div>
       </div>
 
-      <button onClick={() => router.push('/admin/sales')} className="go-orders-btn">
-        Go to all Orders
-      </button>
+      {order.shippingMethod?.toLowerCase() === 'tcs' && (
+        <button className="go-orders-btn" onClick={handleTrackToggle} disabled={loadingTracking}>
+    {loadingTracking ? (
+      <span className="loader"></span>
+    ) : (
+      showTracking ? 'Hide Tracking Info' : 'Track This Order'
+    )}
+  </button>
+      )}
     </>
   );
 };
