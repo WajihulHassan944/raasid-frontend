@@ -4,8 +4,6 @@ import Image from "next/image";
 import InnerImageZoom from 'react-inner-image-zoom';
 import 'react-inner-image-zoom/lib/styles.min.css';
 
-
-
 import { IoClose } from 'react-icons/io5';
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";

@@ -48,13 +48,13 @@ const AdminNav = () => {
 
               {/* ✅ Only show if user role is 'admin' */}
               {user?.role.includes('admin') && (
+               <>
                 <li>
                   <Link href="/admin/addadmin">
                     <TiUserAdd className="icon-three" /> <span>Add Admin</span>
                   </Link>
                 </li>
-              )}
-
+             
               <li>
                 <Link href="/admin/manage-categories">
                   <MdCategory className="icon-three" /> <span>Categories</span>
@@ -65,6 +65,9 @@ const AdminNav = () => {
                   <FaShoppingCart className="icon-three" /> <span>Add Products</span>
                 </Link>
               </li>
+</>
+               )}
+
               <li>
                 <Link href="/admin/sales">
                   <FaExchangeAlt className="icon-three" /> <span>Manage Orders</span>

@@ -17,16 +17,19 @@ export default function CheckoutPage() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const { userData } = useSelector((state) => state.user);
-
-  const [formData, setFormData] = useState({
-    email: '',
-    fullName: '',
-    address: '',
-    city: '',
-    phone: '',
-    shippingMethod: '',
-    paymentMethod: '',
-  });
+const [formData, setFormData] = useState({
+  email: '',
+  fullName: '',
+  house: '',
+  street: '',
+  town: '',
+  tehsil: '',
+  city: '',
+  province: '',
+  phone: '',
+  shippingMethod: '',
+  paymentMethod: '',
+});
 
   const [loading, setLoading] = useState(false);
   const [shippingFee, setShippingFee] = useState(0);
@@ -97,7 +100,7 @@ useEffect(() => {
         if (res.ok) {
           setShippingFee(data.shippingFee || 0);
         } else {
-          toast.error("Failed to fetch TCS shipping fee");
+          console.log("Failed to fetch TCS shipping fee");
           setShippingFee(0);
         }
       } else if (formData.shippingMethod === 'Pakistan Post') {
@@ -106,7 +109,7 @@ useEffect(() => {
       }
     } catch (error) {
       console.error("Shipping fee calculation error:", error);
-      toast.error("Error calculating shipping fee");
+      console.log("Error calculating shipping fee");
     }
   };
 
@@ -119,46 +122,64 @@ useEffect(() => {
 const getTotal = () =>
     cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0) + shippingFee;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const products = cartItems.map((item) => ({
-      productId: item._id,
-      quantity: item.quantity,
-    }));
+  // ✅ Phone format validation: must start with 03 and be exactly 11 digits
+  const phoneRegex = /^03[0-9]{9}$/;
+  if (!phoneRegex.test(formData.phone)) {
+    toast.error("Please enter a valid phone number without country code (e.g., 03123456789)");
+    return;
+  }
 
-    const orderData = {
-      ...formData,
-      products,
-      totalAmount: getTotal(),
-      shippingFee,
-      weight,
-    };
+  // 🧷 Prepare products array
+  const products = cartItems.map((item) => ({
+    productId: item._id,
+    quantity: item.quantity,
+  }));
 
-    setLoading(true);
-    try {
-      const res = await fetch(`${baseUrl}/order/create`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(orderData),
-      });
+  // 🧷 Construct CNIC-style address
+  const fullAddress = `House: ${formData.house}, Street: ${formData.street}, Town: ${formData.town}, Tehsil: ${formData.tehsil}, City: ${formData.city}, Province: ${formData.province}`;
 
-      const data = await res.json();
-
-      if (res.ok) {
-        dispatch(clearCart());
-        toast.success("Order Placed successfully");
-        router.push('/shop');
-      } else {
-        toast.error(data.message || 'Failed to place order.');
-      }
-    } catch (err) {
-      console.error(err);
-      alert('Error placing order.');
-    } finally {
-      setLoading(false);
-    }
+  // 🧷 Create order payload
+  const orderData = {
+    email: formData.email,
+    fullName: formData.fullName,
+    address: fullAddress,
+    city: formData.city,
+    phone: formData.phone,
+    shippingMethod: formData.shippingMethod,
+    paymentMethod: formData.paymentMethod,
+    products,
+    totalAmount: getTotal(),
+    shippingFee,
+    weight,
   };
+
+  setLoading(true);
+  try {
+    const res = await fetch(`${baseUrl}/order/create`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderData),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      dispatch(clearCart());
+      toast.success("Order Placed successfully");
+      router.push('/shop');
+    } else {
+      toast.error(data.message || 'Failed to place order.');
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Error placing order.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <>

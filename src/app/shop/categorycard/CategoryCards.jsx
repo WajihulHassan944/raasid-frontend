@@ -35,7 +35,7 @@ const CategoryCards = () => {
           href={{ pathname: '/shop', query: { category: card.title } }}
           className="category-card"
         >
-          {iconMap[card.title]}
+          <div className='image-of-category'>{iconMap[card.title]}</div>
           <h3 className="category-title">{card.title}</h3>
         </Link>
       ))}

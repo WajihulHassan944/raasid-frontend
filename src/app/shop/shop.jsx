@@ -19,7 +19,8 @@ const Shop = () => {
   const itemsPerPage = 12;
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortOption, setSortOption] = useState('default');
+  const [sortOption, setSortOption] = useState('name-asc'); // default alphabetical sort
+
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -77,10 +78,9 @@ const Shop = () => {
 
           <div className="sort-dropdown">
             <select value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
-              <option value="default">Default Sorting</option>
+              <option value="name-asc">Name: A to Z</option>
               <option value="price-low-high">Price: Low to High</option>
               <option value="price-high-low">Price: High to Low</option>
-              <option value="name-asc">Name: A to Z</option>
               <option value="name-desc">Name: Z to A</option>
             </select>
           </div>
