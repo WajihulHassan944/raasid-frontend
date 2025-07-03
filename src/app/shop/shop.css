@@ -77,9 +77,6 @@ padding: 2rem 13.5%;
   color: #333;
 }
 
-.name-p{
-  height: 50px;
-} 
 .product-price {
   margin: 10px 0;
   font-size: 16px;
@@ -97,7 +94,7 @@ padding: 2rem 13.5%;
   color: #fff;
   padding: 10px 15px;
   border: none;
-  font-weight: bold;
+  font-weight: 100;
   cursor: pointer;
   font-size: 13px;
   text-transform: uppercase;
@@ -158,13 +155,15 @@ padding: 0rem 13.5%;
 .category-heading strong{
      font-weight: 300;
 }
-.out-of-stock-label {
+.out-of-stock-products {
   background-color: #d9534f;
   color: white;
   padding: 6px 12px;
   margin-top: 10px;
   text-align: center;
   font-weight: bold;
+  width: fit-content;
+  font-weight: 100;
 }
 
 /* Responsive tweaks */

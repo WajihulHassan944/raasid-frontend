@@ -59,31 +59,73 @@ const receiptRef = useRef();
   };
 
   if (!order) return <div className="loading-msg">Loading order...</div>;
+
 const handleDownloadReceipt = () => {
   setDownloading(true);
 
   Promise.all([
     import('html2canvas'),
-    import('jspdf')  // dynamically import jsPDF
+    import('jspdf')
   ])
     .then(([html2canvas, jsPDFModule]) => {
       const jsPDF = jsPDFModule.default;
-      const receiptElement = receiptRef.current;
 
-      html2canvas.default(receiptElement, { scale: 2 }).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF('p', 'mm', 'a4');
+      const receiptHTML = `
+        <div style="
+          font-family: 'Segoe UI', sans-serif;
+          font-size: 20px;
+          color: #111;
+          padding: 1.5rem;
+          width: 600px;
+          line-height: 1.5;
+          background: white;
+        ">
+          <div>
+            <h4 style="margin-top:50px;">From,</h4>
+           <div style="margin-left:30px;">
+            <p><strong>PANA FORCE FOOD PROCESSING CENTRE C/O ASC NOWSHERA CANTT <br />KPK</strong></p>
+            <p>Contact: <strong>03465669181</strong></p></div>
+          </div>
 
-        // Calculate dimensions to fit A4 width (210mm - 20mm margins)
-        const pageWidth = pdf.internal.pageSize.getWidth();
-        const pageHeight = pdf.internal.pageSize.getHeight();
-        const imgWidth = pageWidth - 20;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+          <div style="margin-top: 2rem;">
+            <h4>To,</h4>
+           <div style="margin-left:30px;">
+            <p><strong>${order.fullName}</strong></p>
+            <p><strong>${order.address}</strong></p>
+            <p><strong>${order.city}</strong></p>
+            <p><strong>${order.phone}</strong></p>
+            <p><strong>${order.email}</strong></p></div>
+          </div>
 
-        pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
-        pdf.save(`Receipt-${order._id}.pdf`);
-        setDownloading(false);
-      }).catch(() => setDownloading(false));
+         
+        </div>
+      `;
+
+      const container = document.createElement('div');
+      container.innerHTML = receiptHTML;
+      container.style.position = 'absolute';
+      container.style.left = '-9999px';
+      document.body.appendChild(container);
+
+      setTimeout(() => {
+        html2canvas.default(container, { scale: 2 }).then(canvas => {
+          const imgData = canvas.toDataURL('image/png');
+          const pdf = new jsPDF('p', 'mm', 'a4');
+
+          const pageWidth = pdf.internal.pageSize.getWidth();
+          const imgWidth = pageWidth - 20;
+          const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+          pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+          pdf.save(`Receipt-${order._id}.pdf`);
+
+          document.body.removeChild(container);
+          setDownloading(false);
+        }).catch(() => {
+          document.body.removeChild(container);
+          setDownloading(false);
+        });
+      }, 100);
     })
     .catch(() => setDownloading(false));
 };
@@ -129,55 +171,26 @@ const handleDownloadReceipt = () => {
             </div>
           </div>
 
-
 <div className="order-receipt" ref={receiptRef}>
   <h3>Receipt</h3>
-
   <div className="receipt-from-to">
     <div className="receipt-from">
-      <h4>From</h4>
-      <p>mre project, care of headquarter ASC center, Nowshera, KPK</p>
+      <h4 style={{marginTop:'50px'}}>From,</h4>
+      <p><strong>PANA FORCE FOOD PROCESSING CENTRE C/O ASC NOWSHERA CANTT <br />KPK</strong></p>
+      <p>Contact: <strong>03465669181</strong></p>
     </div>
 
     <div className="receipt-to" style={{ marginTop: '2rem' }}>
-      <h4>To</h4>
-      <p><strong>Respected {order.fullName},</strong></p>
-      <p>{order.address}, {order.city}</p>
+      <h4>To,</h4>
+      <p><strong>{order.fullName}</strong></p>
+      <p><strong>{order.address}</strong></p>
+      <p><strong>{order.city}</strong></p>
+      <p><strong>{order.phone}</strong></p>
+      <p><strong>{order.email}</strong></p>
     </div>
   </div>
 
-  <div className="receipt-body">
-    <p>
-      We are pleased to confirm your order placed on {new Date(order.createdAt).toLocaleDateString('en-GB')}.
-      The package includes {order.products.length} item{order.products.length > 1 ? 's' : ''}, 
-      shipped via <strong>{order.shippingMethod}</strong>.
-    </p>
-
-    {/* 📦 Conditional Consignment/PP Order ID */}
-    {courier?.ppOrderId && (
-      <p>
-        {order.shippingMethod?.toLowerCase() === 'tcs' ? 'Consignment No:' : 'Pak Post Order ID:'}{' '}
-        <strong>{courier.ppOrderId}</strong>
-      </p>
-    )}
-
-    <p>
-      Your selected payment method was <strong>{order.paymentMethod}</strong>. 
-      The total amount was <strong>PKR {order.totalAmount}</strong>.
-    </p>
-
-    {courier && (
-      <p>
-        Shipping weight is <strong>{courier.weight}g</strong> with charges of 
-        <strong> PKR {courier.charges}</strong> included in total.
-      </p>
-    )}
-
-    <p style={{ marginTop: '1rem' }}>Cell No: <strong>{order.phone}</strong></p>
-    <p>Email: <strong>{order.email}</strong></p>
-  </div>
 </div>
-
 
 
 

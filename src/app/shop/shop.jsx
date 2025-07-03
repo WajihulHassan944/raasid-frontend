@@ -21,6 +21,9 @@ const Shop = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOption, setSortOption] = useState('name-asc'); // default alphabetical sort
 
+useEffect(() => {
+  setCurrentPage(1);
+}, [sortOption]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -49,17 +52,25 @@ const Shop = () => {
 
   const totalPages = Math.ceil(products.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
+const sortedProducts = [...products];
 
-  const sortedProducts = [...products];
-  if (sortOption === 'price-low-high') {
-    sortedProducts.sort((a, b) => a.price - b.price);
-  } else if (sortOption === 'price-high-low') {
-    sortedProducts.sort((a, b) => b.price - a.price);
-  } else if (sortOption === 'name-asc') {
-    sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
-  } else if (sortOption === 'name-desc') {
-    sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
-  }
+// Apply primary sorting
+if (sortOption === 'price-low-high') {
+  sortedProducts.sort((a, b) => a.price - b.price);
+} else if (sortOption === 'price-high-low') {
+  sortedProducts.sort((a, b) => b.price - a.price);
+} else if (sortOption === 'name-asc') {
+  sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+} else if (sortOption === 'name-desc') {
+  sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
+}
+
+// Move out-of-stock products to the end
+sortedProducts.sort((a, b) => {
+  const aOut = a.price === 0;
+  const bOut = b.price === 0;
+  return aOut - bOut;
+});
 
   const currentProducts = sortedProducts.slice(startIndex, startIndex + itemsPerPage);
 
@@ -97,14 +108,14 @@ const Shop = () => {
             <div key={product._id || index} className="product-card-3">
               <Link href={`/productdetails?productId=${product._id}`}>
                 <img src={product.image} alt={product.name} />
-                <h3 className="name-p numbers">{product.name}</h3>
+                <h3 className="numbers">{product.name}</h3>
                 <h3 className="numbers" style={{ fontWeight: '600', fontSize: '14px' }}>
                   {product.packaging}
                 </h3>
               </Link>
 
               {product.price === 0 ? (
-                <div className="out-of-stock-label">Out of Stock</div>
+                <center><div className="out-of-stock-products">Out of Stock</div></center>
               ) : (
                 <>
                   <div className="product-price">
@@ -119,35 +130,43 @@ const Shop = () => {
           ))}
         </div>
 
-        {totalPages > 1 && (
-          <div className="pagination">
-            <button
-              className="page-btn arrow-btn"
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-            >
-              ‹
-            </button>
+{totalPages > 1 && (
+  <div className="pagination">
+    {startIndex > 0 && (
+      <button
+        className="page-btn arrow-btn"
+        onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+      >
+        ‹
+      </button>
+    )}
 
-            {[...Array(totalPages)].map((_, index) => (
-              <button
-                key={index}
-                className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
-                onClick={() => setCurrentPage(index + 1)}
-              >
-                {index + 1}
-              </button>
-            ))}
+    {[...Array(totalPages)].map((_, index) => {
+      const pageStart = index * itemsPerPage;
+      const hasItems = sortedProducts.slice(pageStart, pageStart + itemsPerPage).length > 0;
 
-            <button
-              className="page-btn arrow-btn"
-              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-            >
-              ›
-            </button>
-          </div>
-        )}
+      return hasItems ? (
+        <button
+          key={index}
+          className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
+          onClick={() => setCurrentPage(index + 1)}
+        >
+          {index + 1}
+        </button>
+      ) : null;
+    })}
+
+    {startIndex + itemsPerPage < sortedProducts.length && (
+      <button
+        className="page-btn arrow-btn"
+        onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+      >
+        ›
+      </button>
+    )}
+  </div>
+)}
+
       </div>
     </>
   );
