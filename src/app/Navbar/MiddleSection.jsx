@@ -146,7 +146,6 @@ useEffect(() => {
     </button>
   </div>
 
-  {/* 🔽 Dropdown for filtered products */}
 {showDropdown && (
   <div className="product-dropdown">
     {filteredProducts.slice(0, 4).map((product) => (
@@ -164,7 +163,11 @@ useEffect(() => {
           <img src={product.image} alt={product.name} />
           <div className="product-info">
             <h4>{product.name}</h4>
-            <p className="price numbers">{product.price} PKR</p>
+            {product.price === 0 ? (
+              <div className="out-of-stock-label">Out of Stock</div>
+            ) : (
+              <p className="price numbers">{product.price} PKR</p>
+            )}
           </div>
         </div>
       </Link>

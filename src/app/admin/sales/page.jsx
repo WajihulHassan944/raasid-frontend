@@ -28,9 +28,11 @@ const Sales = () => {
             amount: `${order.totalAmount} PKR`,
             status: order.status,
             shipping: order.shippingMethod || "N/A",
+            ppOrderId: order?.ppOrderId || "",
           }));
           setOrders(formatted);
         } else {
+          console.error("Backend responded with failure:", data);
           toast.error("Failed to load orders.");
         }
       } catch (err) {
@@ -42,33 +44,71 @@ const Sales = () => {
     fetchOrders();
   }, []);
 
-  // Handle status change
- const handleStatusChange = async (index, newStatus) => {
-  const updatedOrders = [...orders];
-  const orderToUpdate = updatedOrders[index];
+  const handleStatusChange = async (index, newStatus) => {
+    const updatedOrders = [...orders];
+    const orderToUpdate = updatedOrders[index];
+console.log("furqan", orderToUpdate);
+    try {
+      const shippingMethod = orderToUpdate.shipping?.toLowerCase();
 
-  try {
-    const res = await fetch(`${baseUrl}/order/${orderToUpdate.id}/status`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status: newStatus })
-    });
+      // Cancel via TCS API if required
+      if (newStatus === "Cancelled" && shippingMethod === "tcs") {
+        const consignmentNumber =orderToUpdate.ppOrderId || "";
+        if (!consignmentNumber) {
+          console.error("Missing ppOrderId for TCS order:", orderToUpdate);
+          return toast.error("Missing consignment number for TCS.");
+        }
 
-    const data = await res.json();
+        const cancelPayload = { consignmentNumber };
+        console.log("TCS Cancellation Request:");
+        console.log("➡️ URL:", `${baseUrl}/courier/tcs/cancel`);
+        console.log("➡️ Headers:", { "Content-Type": "application/json" });
+        console.log("➡️ Body:", cancelPayload);
 
-    if (res.ok && data.success) {
-      updatedOrders[index].status = newStatus;
-      setOrders(updatedOrders);
-      toast.success("Status updated successfully.");
-    } else {
-      toast.error(data.message || "Failed to update status.");
+        const cancelRes = await fetch(`${baseUrl}/courier/tcs/cancel`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(cancelPayload),
+        });
+
+        const cancelData = await cancelRes.json();
+        console.log("⬅️ TCS Cancellation Response:", cancelData);
+
+        if (!cancelRes.ok || !cancelData.success) {
+          console.error("TCS cancellation failed:", cancelData);
+          return toast.error(cancelData.message || "TCS cancellation failed.");
+        }
+      }
+
+      // Update order status
+      const updatePayload = { status: newStatus };
+      console.log("Order Status Update Request:");
+      console.log("➡️ URL:", `${baseUrl}/order/${orderToUpdate.id}/status`);
+      console.log("➡️ Headers:", { "Content-Type": "application/json" });
+      console.log("➡️ Body:", updatePayload);
+
+      const res = await fetch(`${baseUrl}/order/${orderToUpdate.id}/status`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatePayload),
+      });
+
+      const data = await res.json();
+      console.log("⬅️ Status Update Response:", data);
+
+      if (res.ok && data.success) {
+        updatedOrders[index].status = newStatus;
+        setOrders(updatedOrders);
+        toast.success("Status updated successfully.");
+      } else {
+        console.error("Failed to update status:", data);
+        toast.error(data.message || "Failed to update status.");
+      }
+    } catch (err) {
+      console.error("Error updating order status:", err);
+      toast.error("Error updating status.");
     }
-  } catch (err) {
-    console.error("Error updating order status:", err);
-    toast.error("Error updating status.");
-  }
-};
-
+  };
 
   return (
     <>
@@ -91,41 +131,53 @@ const Sales = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order, index) => (
-              <tr key={index}>
-                <td className="numbers">{order.invoice}</td>
-                <td className="numbers">{order.time}</td>
-                <td className="numbers">{order.customer}</td>
-                <td className="numbers">{order.phone}</td>
-                <td className="numbers">{order.amount}</td>
-                <td className="numbers">{order.shipping}</td>
-                <td className="numbers">
-                  <span className={`status ${order.status.toLowerCase()}`}>
-                    {order.status}
-                  </span>
-                </td>
-                <td>
+            {orders.map((order, index) => {
+              const isTCS = order.shipping?.toLowerCase() === "tcs";
+              return (
+                <tr key={index}>
+                  <td className="numbers">{order.invoice}</td>
+                  <td className="numbers">{order.time}</td>
+                  <td className="numbers">{order.customer}</td>
+                  <td className="numbers">{order.phone}</td>
+                  <td className="numbers">{order.amount}</td>
+                  <td className="numbers">{order.shipping}</td>
+                  <td className="numbers">
+                    <span className={`status ${order.status.toLowerCase()}`}>
+                      {order.status}
+                    </span>
+                  </td>
+                  <td>
                   <select
-                    className="action-dropdown"
-                    value={order.status}
-                    onChange={(e) => handleStatusChange(index, e.target.value)}
-                  >
-                    <option value="Delivered">Delivered</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Processing">Processing</option>
-                    <option value="Cancelled">Cancelled</option>
-                  </select>
-                </td>
-                <td>
-                  <button
-                    className="view-details-btn"
-                    onClick={() => router.push(`/admin/ordersummary?id=${order.id}`)}
-                  >
-                    View Details
-                  </button>
-                </td>
-              </tr>
-            ))}
+  className="action-dropdown"
+  value={order.status}
+  onChange={(e) => handleStatusChange(index, e.target.value)}
+  disabled={order.status === "Cancelled"}
+>
+  {order.status === "Cancelled" ? (
+    <option value="Cancelled">Cancelled</option>
+  ) : (
+    <>
+      <option value="Delivered">Delivered</option>
+      <option value="Pending">Pending</option>
+      <option value="Processing">Processing</option>
+      {isTCS && <option value="Cancelled">Cancelled</option>}
+    </>
+  )}
+</select>
+
+
+                  </td>
+                  <td>
+                    <button
+                      className="view-details-btn"
+                      onClick={() => router.push(`/admin/ordersummary?id=${order.id}`)}
+                    >
+                      View Details
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         <ToastContainer />

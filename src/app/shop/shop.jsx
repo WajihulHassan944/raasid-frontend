@@ -97,7 +97,7 @@ const Shop = () => {
             <div key={product._id || index} className="product-card-3">
               <Link href={`/productdetails?productId=${product._id}`}>
                 <img src={product.image} alt={product.name} />
-                <h3 className="numbers">{product.name}</h3>
+                <h3 className="name-p numbers">{product.name}</h3>
                 <h3 className="numbers" style={{ fontWeight: '600', fontSize: '14px' }}>
                   {product.packaging}
                 </h3>

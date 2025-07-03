@@ -4,101 +4,72 @@ import './faqs.css';
 
 const faqs = [
   {
-    category: 'Ordering & Products',
+    category: 'Products & Quality',
     items: [
       {
-        question: 'What types of products does Raasid offer?',
+        question: 'What products does Raasid offer?',
         answer:
-          'Raasid offers ready-to-eat meals, premium spices, juices, and other nutritious food products made with authentic ingredients.',
+          'Raasid provides a wide range of premium ready-to-eat meals, refreshing juices, natural fruit preserves, spices, mineral water, and wholesome granola bars—all crafted to deliver authentic taste and simplify mealtime.',
       },
       {
-        question: 'How do I place an order?',
+        question: 'Are Raasid’s products preservative-free?',
         answer:
-          'You can place an order directly on our website by selecting the products, adding them to your cart, and completing the checkout process.',
+          'Yes! With a commitment to natural and authentic flavors, our food is free from artificial preservatives and undergoes high-quality hygiene processes.',
       },
       {
-        question: 'Can I modify or cancel my order after placing it?',
+        question: 'Where are Raasid products sourced from and manufactured?',
         answer:
-          'Please contact us immediately if you need to modify or cancel an order. Changes can only be made before the order is dispatched.',
+          'Our offerings are crafted at the state-of-the-art PANA Force Food Processing Center, adhering to strict quality and halal standards. They’re often sampled by Pakistan Armed Forces’ inspection units before release.',
       },
       {
-        question: 'Are your products Halal certified?',
+        question: 'Are Raasid’s products halal-certified?',
         answer:
-          'Yes, all Raasid products are Halal and meet international food safety standards including ISO certifications.',
+          'Yes — every product is halal-compliant, hygienically packed, and crafted with natural ingredients to maintain authentic taste.',
+      },
+      {
+        question: 'Do you have any quality assurances?',
+        answer:
+          'Yes! We offer a money-back guarantee, adhere to secure payments, and ensure hygiene via periodic inspections. Our products reflect our promise of excellence and authentic taste.',
       },
     ],
   },
   {
-    category: 'Delivery',
+    category: 'Ordering & Delivery',
     items: [
       {
-        question: 'Do you deliver across Pakistan?',
-        answer: 'Yes! We deliver to over 70 cities across Pakistan.',
+        question: 'How can I purchase Raasid products?',
+        answer:
+          'You can conveniently shop directly through our website’s Shop section and enjoy secure payment options, free shipping on orders over Rs. 2,000, and a 2-day delivery guarantee.',
       },
       {
-        question: 'How long does delivery take?',
-        answer: 'Delivery typically takes 2–5 working days depending on your location.',
-      },
-      {
-        question: 'Can I track my order?',
-        answer: 'Yes, you’ll receive an order confirmation and tracking details via SMS or email.',
+        question: 'Do you offer nationwide delivery?',
+        answer:
+          'Absolutely! We deliver all across Pakistan. Plus, orders exceeding Rs. 2,000 qualify for free shipping.',
       },
     ],
   },
   {
-    category: 'Payments',
+    category: 'Shelf Life & Ingredients',
     items: [
       {
-        question: 'What payment methods do you accept?',
-        answer: 'We accept Cash on Delivery (COD), bank transfers, and digital payment methods via our integrated payment partners.',
-      },
-      {
-        question: 'Is online payment safe?',
-        answer: 'Absolutely. We use secure and encrypted payment gateways to ensure your information is protected.',
+        question: 'What is the shelf life of your ready-to-eat meals and juices?',
+        answer:
+          'We process and package our products without preservatives, maintaining freshness through modern packaging and strict quality controls. Specific shelf-life details are available on each product page.',
       },
     ],
   },
   {
-    category: 'Returns & Refunds',
+    category: 'Contact & Support',
     items: [
       {
-        question: 'What is your return policy?',
-        answer: 'Perishable items cannot be returned unless they are defective or delivered in error. Contact us within 24 hours of delivery for assistance.',
+        question: 'How can I get in touch for quality concerns or bulk orders?',
+        answer:
+          'Reach out via:\na. Phone: +92 311 111 888 37\nb. Email: info@raasid.com\nWe’re happy to assist with any queries, feedback, or large-scale order needs.',
       },
       {
-        question: 'How do I request a refund or replacement?',
-        answer: 'Email us at info@raasid.com or call +92-311-1188837 with your order number and issue. We’ll review and respond promptly.',
-      },
-    ],
-  },
-  {
-    category: 'Product Details',
-    items: [
-      {
-        question: 'Where can I find nutritional and weight information?',
-        answer: 'Each product page includes nutritional facts and net weight. If anything is unclear, feel free to reach out to our support team.',
-      },
-      {
-        question: 'Are your meals ready to eat?',
-        answer: 'Yes. Our meals are fully cooked and only require minimal heating (if needed) before consumption.',
-      },
-    ],
-  },
-  {
-    category: 'Privacy & Security',
-    items: [
-      {
-        question: 'Is my personal information safe with you?',
-        answer: 'Yes, we follow a strict privacy policy and never sell your information. Data is encrypted and stored securely.',
-      },
-    ],
-  },
-  {
-    category: 'Business & Wholesale',
-    items: [
-      {
-        question: 'Do you offer bulk or wholesale pricing?',
-        answer: 'Yes, we provide B2B and wholesale options. Please contact us at info@raasid.com for inquiries.',
+        question: 'Can I visit your facility or take a 360° tour?',
+        answer:
+          'Yes! Our website features a 360° tour of our facility. Feel free to contact us to schedule a visit or guided session.',
       },
     ],
   },
@@ -124,7 +95,12 @@ export default function FaqPage() {
                 <span className="faq-icon">{openQuestion === faq.question ? '✕' : '+'}</span>
               </div>
               {openQuestion === faq.question && (
-                <div className="faq-answer">{faq.answer}</div>
+               <div className="faq-answer">
+  {faq.answer.split('\n').map((line, index) => (
+    <p key={index}>{line}</p>
+  ))}
+</div>
+
               )}
             </div>
           ))}

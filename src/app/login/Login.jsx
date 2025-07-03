@@ -101,11 +101,7 @@ const [loading, setLoading] = useState(false);
             </button>
           </div>
 
-          <div className="login-options">
-            <label className="remember-me">
-              <input type="checkbox" /> Remember me
-            </label>
-          </div>
+       
 
           {error && <p className="login-error">{error}</p>}
 

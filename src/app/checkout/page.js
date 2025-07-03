@@ -17,6 +17,8 @@ export default function CheckoutPage() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const { userData } = useSelector((state) => state.user);
+  const [originCity, setOriginCity] = useState('');
+
 const [formData, setFormData] = useState({
   email: '',
   fullName: '',
@@ -97,8 +99,10 @@ useEffect(() => {
       if (formData.shippingMethod === 'TCS') {
         const res = await fetch(`${baseUrl}/cities/resolve-shipping-fee/${formData.city}/${weightStr}`);
         const data = await res.json();
+        console.log("tcs data is",data)
         if (res.ok) {
           setShippingFee(data.shippingFee || 0);
+          setOriginCity(data.origin || ""); 
         } else {
           console.log("Failed to fetch TCS shipping fee");
           setShippingFee(0);
@@ -154,6 +158,7 @@ const handleSubmit = async (e) => {
     totalAmount: getTotal(),
     shippingFee,
     weight,
+    originCity,
   };
 
   setLoading(true);
